@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_home"
+        android:icon="@mipmap/ic_library_gray"
+        android:title="首页" />
+    <item
+        android:id="@+id/item_news"
+        android:icon="@mipmap/ic_news_gray"
+        android:title="动态" />
+
+<!--    <item-->
+<!--        android:id="@+id/item_local"-->
+<!--        android:icon="@drawable/icon_openmap_mark"-->
+<!--        android:title="我在这里" />-->
+
+    <item
+        android:id="@+id/item_find"
+        android:icon="@mipmap/ic_discovery_gray"
+        android:title="发现" />
+
+    <item
+        android:id="@+id/item_mine"
+        android:icon="@drawable/tab_settings_normal_2"
+        android:title="我的" />
+
+</menu>

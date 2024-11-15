@@ -1,0 +1,47 @@
+# 3ds Max Wavefront OBJ Exporter v0.99 - (c)2007 guruware
+# File Created: 19.04.2022 21:37:29
+
+newmtl Hero_Biaoge_Body
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Tr 0.0000
+	d 1.0000
+	Tf 0.0000 0.0000 0.0000
+	Pr 0.5678
+	Pm 0.0000
+	Pc 0.0000
+	Pcr 0.0000
+	Ni 1.5200
+	Ke 0.0000 0.0000 0.0000
+	illum 2
+	map_Kd Hero_Biaoge_Body.png
+
+newmtl Hero_Biaoge_Face
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Tr 0.0000
+	d 1.0000
+	Tf 0.0000 0.0000 0.0000
+	Pr 0.5678
+	Pm 0.0000
+	Pc 0.0000
+	Pcr 0.0000
+	Ni 1.5200
+	Ke 0.0000 0.0000 0.0000
+	illum 2
+	map_Kd Hero_Biaoge_Face.png
+
+newmtl Hero_Biaoge_Hair
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.2000 0.2000 0.2000
+	Tr 0.0000
+	d 1.0000
+	Tf 0.0000 0.0000 0.0000
+	Pr 0.5678
+	Pm 0.0000
+	Pc 0.0000
+	Pcr 0.0000
+	Ni 1.5200
+	Ke 0.0000 0.0000 0.0000
+	illum 2
+	map_Kd Hero_Biaoge_Hair.png

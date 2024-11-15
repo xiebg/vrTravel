@@ -1,0 +1,151 @@
+{% extends '../layout.html' %}
+{% block head %}
+    <link rel="stylesheet" href="/public/easyui/v1.4/themes/default/easyui.css">
+    <link rel="stylesheet" href="/public/easyui/v1.4/themes/icon.css">
+<!--    <script src="jquery-easyui-1.5.4.5/jquery.min.js"></script> -->
+    <script src="/public/easyui/v1.4/jquery.easyui.min.js"></script>
+{% endblock%}
+{% block body %}
+
+<div class="container">
+	<div class="BG">
+		<div class="list">选项一</div>
+		<div class="list">选项二</div>
+		<div class="list">选项三</div>
+		<div class="list">选项四</div>
+		<div class="list">选项五</div>
+		<div id="active"></div>
+	</div>
+</div>
+
+<div class="content-box">
+	<div class="content ">
+<!--		<h1>Section 1</h1>-->
+		<div class="easyui-tabs" style="width:100%;height:200px;">
+			<div title="说明1" style="margin-top:30px;">
+				<div>这里是一个tab栏切换的实现！</div>
+				<div>但好像不缺什么功能了，所以它是空白的！</div>
+				<div>有什么建议可以打下面电话联系作者！</div>
+			</div>
+			<div title="说明2" style="margin-top:30px;">
+				<div>上面大的tab是jquery实现的</div>
+				<div>下面小的tab是easyui实现的</div>
+				<div>好像不缺什么了！</div>
+				<div>还缺什么?</div>
+				<div>给我说说呗！</div>
+			</div>
+			<div title="说明3" style="margin-top:30px;">
+				<div>这里啥也没有</div>
+				<div>还在开发中...</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="easyui-tabs" style="width:100%;height:200px;">
+			<h1>啥也没有2</h1>
+		</div>
+	</div>
+	<div class="content">
+		<div class="easyui-tabs" style="width:100%;height:200px;">
+			<h1>啥也没有3</h1>
+		</div>
+	</div>
+	<div class="content">
+		<div class="easyui-tabs" style="width:100%;height:200px;">
+			<h1>啥也没有4</h1>
+		</div>
+	</div>
+	<div class="content">
+		<div class="easyui-tabs" style="width:100%;height:200px;">
+			<h1>啥也没有5</h1>
+		</div>
+	</div>
+</div>
+<script>
+	// $("#news").addClass("layui-this");
+
+
+	$(document).ready(function () {
+		/*设置默认激活的选项卡eq(i)*/
+		var aL = $(".list:eq(0)");
+		$("#active").width(aL.innerWidth());
+		$("#active").offset(aL.offset());
+		aL.addClass("listA");
+		/*为每个按钮添加点击事件*/
+		$(".list").click(function() {
+			$("#active").width($(this).innerWidth());   //设置宽度
+			$("#active").offset($(this).offset());   //设置位置
+			$(this).addClass("listA");
+			$(".list").not(this).removeClass("listA");
+			let index = $(this).index();
+			$(".content-box>div").hide().eq(index).show();
+		});
+
+		/*hover效果*/
+		$(".list").hover(function () {
+			$(this).addClass("listH")
+		},function () {
+			$(this).removeClass("listH")
+		})
+
+		$(".content-box>div").hide().eq(0).show();
+
+	});
+</script>
+
+<style>
+	.content-box>div{
+		margin-left: 40px;
+		/*top:20px;*/
+	}
+
+	/*container容器只是为了水平居中，如不需要可以去掉这层嵌套*/
+	.container{
+		left: 50%;
+		margin-top: 10px;
+		float: left;
+		cursor:pointer;
+		position: relative;
+		margin-bottom: 20px;
+	}
+	.BG{
+		right: 50%;
+		font-size: 0;
+		background-color: #f2f2f2;
+		border-radius: 30px;
+		position: relative;
+	}
+	.container div{
+		font-size: 16px;
+		line-height: 60px;
+	}
+	.list{
+		float: left;
+		display: inline-block;
+		padding: 0 50px;
+		transition: color 0.5s;
+		position: relative;
+		z-index: 1;
+	}
+
+	/*这里的listH和listA顺序不能换，有优先级，当listA被使用时listH不起作用*/
+	.listH{
+		color: #ff8300;
+	}
+	.listA{
+		color: #fff;
+	}
+
+	/*滑块*/
+	#active{
+		width: 100px;
+		height: 60px;
+		border-radius: 30px;
+		background-color: #ff8300;
+		box-shadow: 0 5px 16px 0 rgba(255, 144, 0, 0.58);
+		position: relative;
+		z-index: 0;
+		transition: left 0.5s,width 1s;
+	}
+</style>
+{% endblock %}

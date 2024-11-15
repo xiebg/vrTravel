@@ -1,0 +1,31 @@
+{% extends '../layout.html' %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/public/webuploader/webuploader.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/uploadstyle.css" />
+<!--    <link rel="stylesheet" href="./js/easyui/v1.4/themes/metro/easyui.css">-->
+    <link rel="stylesheet" href="/public/easyui/v1.4/themes/metro/easyui.css">
+    <link rel="stylesheet" href="/public/css/jquery-rebox.css">
+    <script type="text/javascript">
+      getServerPath = function(){
+        return "./server/";
+      };
+      getJsPath = function(){
+        return "./js/";
+      };
+  </script>
+{% endblock%}
+{% block body %}
+    <div><h1>文件上传功能：</h1></div>
+    <div id="wrapper" ng-app="app-demo">
+        
+       <ag-Picture ng-model="a" style="margin:10px"></ag-Picture>
+    </div>
+<!--    <script type="text/javascript" src="/public/js/jquery-1.12.4.js"></script>-->
+    <script src="/public/easyui/v1.4/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/public/webuploader/webuploader.js"></script>
+    <script src="/public/js/angular/v1.2.16/angular.js"></script>
+    <script src="/public/js/angular/v1.2.16/angular-route.js"></script>
+    <script src="/public/js/angular-ui-router/v0.2.15/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="/public/js/jquery-rebox.js"></script>
+    <script type="text/javascript" src="/public/js/upload.js"></script>
+{% endblock %}

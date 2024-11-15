@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.engineer.panorama"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <queries>
+        <package android:name="com.instagram.android" />
+    </queries>
+
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="false"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- //读取设备硬件信息，统计数据 -->
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" /> <!-- 读取外置存储。如果开发者使用了so动态加载功能并且把so文件放在了外置存储区域，则需要申请该权限，否则不需要 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 访问闪光灯 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name=".PanoDemoApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/vr_logo"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <activity
+            android:name=".ui.HotelPanoViewListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.TFSelectActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.IndoorPanoViewListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.PanoViewListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.NewsDetailsActivity"
+            android:exported="true" /> <!-- <activity -->
+        <!-- android:name=".ui.NewsItemActivity" -->
+        <!-- android:exported="true" /> -->
+        <activity android:name=".ui.SettingActivity" />
+        <activity android:name=".ui.EmepyActivity" />
+        <activity
+            android:name=".ui.FullActivity"
+            android:exported="true"
+            android:theme="@style/TransparentTheme" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name="com.engineer.google.GoogleMapsActivity"
+            android:label="@string/title_activity_google_maps" />
+        <activity android:name=".ui.MultiPanoViewActivity" />
+        <activity android:name=".ui.PanoPagerActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".tf.CameraActivity" />
+        <activity
+            android:name=".ui.PanoViewActivity"
+            android:theme="@style/TransparentTheme" />
+        <activity android:name=".ui.ListPanoViewActivity" />
+        <activity android:name=".ui.ListMapViewActivity" />
+        <activity
+            android:name=".ui.MapViewActivity"
+            android:theme="@style/TransparentTheme" />
+        <activity
+            android:name=".ui.MapActivity"
+            android:label="地图" />
+        <activity
+            android:name=".easyar.EasyARActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:label="AR景点浏览"
+            android:screenOrientation="unspecified" />
+        <activity android:name=".ui.SinglePanoViewActivity" />
+        <activity android:name=".ui.HotelPanoViewActivity" />
+        <activity android:name=".ui.IndoorPanoViewActivity" />
+        <activity android:name=".location.BNaviMainActivity" />
+        <activity android:name=".location.BNaviGuideActivity" />
+        <activity android:name=".location.WNaviGuideActivity" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".login.RegisterActivity" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="fMcBERzeyWDZ7IM37pSxco2O1bN2BCIB" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+    </application>
+
+</manifest>

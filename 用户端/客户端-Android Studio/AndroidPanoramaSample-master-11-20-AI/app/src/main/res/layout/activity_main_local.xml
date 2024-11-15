@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#f6f6f6"
+        android:orientation="horizontal">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="vertical"
+                android:background="#ffffff">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:text="福建省三明"
+                        android:gravity="left"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_temperature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center"
+                        android:layout_weight="1"
+                        android:text="10°晴"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+                <LinearLayout
+                    android:id="@+id/panorama_click"
+                    android:layout_width="150dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_button_style"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="107dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="17dp"
+                        android:gravity="center">
+                        <Button
+                            android:layout_width="68dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/vr2"
+                            android:gravity="top"
+                            android:padding="5dip" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="VR导航"
+                        android:textColor="#364f6b"
+                        android:textSize="15dip">
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/navi_click"
+                    android:layout_width="150dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/ic_button_style"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="107dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="17dp"
+                        android:gravity="center">
+                        <Button
+                            android:layout_width="68dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/home_train"
+                            android:gravity="top"
+                            android:padding="5dip" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="交通导航"
+                        android:textColor="#364f6b"
+                        android:textSize="15dip">
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+                <LinearLayout
+                    android:id="@+id/indoor_click"
+                    android:layout_width="150dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/ic_button_style"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="107dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="17dp"
+                        android:gravity="center">
+                        <Button
+                            android:layout_width="68dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/zhushou_img"
+                            android:gravity="top"
+                            android:padding="5dip" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="VR内景"
+                        android:textColor="#364f6b"
+                        android:textSize="15dip">
+                    </TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ar_click"
+                    android:layout_width="150dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_button_style"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="107dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="17dp"
+                        android:gravity="center">
+                        <Button
+                            android:layout_width="68dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/zhinengxinpian"
+                            android:gravity="top"
+                            android:padding="5dip" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="AI景点预测"
+                        android:textColor="#364f6b"
+                        android:textSize="15dip">
+                    </TextView>
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+                <LinearLayout
+                    android:id="@+id/map_click"
+                    android:layout_width="150dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_button_style"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="107dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="17dp"
+                        android:gravity="center">
+                        <Button
+                            android:layout_width="68dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/map_image"
+                            android:gravity="top"
+                            android:padding="5dip" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="地图"
+                        android:textColor="#364f6b"
+                        android:textSize="15dip">
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/hotel_click"
+                    android:layout_width="150dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/ic_button_style"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="107dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="17dp"
+                        android:gravity="center">
+                        <Button
+                            android:layout_width="68dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/home_hotel"
+                            android:gravity="top"
+                            android:padding="5dip" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="酒店"
+                        android:textColor="#364f6b"
+                        android:textSize="15dip">
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:id="@+id/spot_click"
+                    android:layout_width="127dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_button_style"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="107dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="17dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <Button
+                            android:layout_width="68dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/home_hot"
+                            android:gravity="top"
+                            android:padding="5dip" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="热门景点"
+                        android:textColor="#364f6b"
+                        android:textSize="15dip">
+
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

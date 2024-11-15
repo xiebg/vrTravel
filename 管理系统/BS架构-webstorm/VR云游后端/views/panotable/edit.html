@@ -1,0 +1,102 @@
+{% extends '../layout.html' %}
+{% block head %}
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+<link rel="stylesheet" href="/public/css/public.css" media="all">
+{% endblock%}
+{% block body %}
+<div class="layui-form layuimini-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">uid不可修改：</label>
+        <div class="layui-input-block">
+            <input type="text" name="uid" disabled value="{{pano.uid}}" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">风景区</label>
+        <div class="layui-input-block">
+            <input type="text" name="pano_name" lay-verify="required" lay-reqtext="风景区不能为空" placeholder="请输入风景区" value="{{pano.pano_name}}" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="pano_addr" lay-verify="required" lay-reqtext="地址不能为空" placeholder="请输入地址" value="{{pano.pano_addr}}" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">经度</label>
+        <div class="layui-input-block">
+            <input type="text" name="pano_x" lay-verify="required" lay-reqtext="经度不能为空" placeholder="请输入经度" value="{{pano.pano_x}}" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">纬度</label>
+        <div class="layui-input-block">
+            <input type="text" name="pano_y" lay-verify="required" lay-reqtext="纬度不能为空" placeholder="请输入纬度" value="{{pano.pano_y}}" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">外景uid</label>
+        <div class="layui-input-block">
+            <input type="text" name="pano_uid" lay-verify="required" lay-reqtext="外景uid不能为空" placeholder="请输入外景uid" value="{{pano.pano_uid}}" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">创建时间</label>
+        <div class="layui-input-block">
+            <input type="text" name="create_time" lay-verify="required" lay-reqtext="创建时间不能为空" placeholder="请输入创建时间" value="{{pano.create_time}}" class="layui-input" id="createTime">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['form','laydate'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$,
+            laydate = layui.laydate;
+
+        // 日期选择
+        laydate.render({
+            elem:'#createTime',
+            type: "datetime"
+        })
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            var index = layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            }, function () {
+                var iframeIndex = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(iframeIndex);
+                //提交数据
+                $.ajax({
+                    url: "/table/pano/update",
+                    type: "get",
+                    data: data.field,
+                    // dataType: "json",
+                    async: true, //同步
+                    success: function (x) {
+                        // layer.msg("添加成功");
+                    }
+                });
+                // 关闭弹出层
+                layer.close(index);
+                parent.location.reload();
+
+            });
+            return false;
+        });
+
+    });
+</script>
+{% endblock %}

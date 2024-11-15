@@ -1,0 +1,69 @@
+{% extends '../layout.html' %}
+{% block head %}
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+<link rel="stylesheet" href="/public/css/public.css" media="all">
+{% endblock%}
+{% block body %}
+<div class="layui-form layuimini-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label required">用户名</label>
+        <div class="layui-input-block">
+            <input type="text" name="username" lay-verify="required" lay-reqtext="用户名不能为空" placeholder="请输入用户名" value="" class="layui-input">
+            <tip>填写自己管理账号的名称。</tip>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">密码</label>
+        <div class="layui-input-block">
+            <input type="password" name="password" lay-verify="required" lay-reqtext="密码不能为空" placeholder="请输入密码" value="" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            var index = layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            }, function () {
+                var iframeIndex = parent.layer.getFrameIndex(window.name);
+                console.log();
+                parent.layer.close(iframeIndex);
+                //提交数据
+                // console.log(data.field);
+                $.ajax({
+                    url: "/table/user/add",
+                    type: "get",
+                    data: data.field,
+                    // dataType: "json",
+                    async: true, //同步
+                    success: function (x) {
+                        // layer.msg("添加成功");
+
+                    }
+                });
+                // 关闭弹出层
+                layer.close(index);
+                parent.location.reload();
+
+            });
+            return false;
+        });
+
+    });
+</script>
+{% endblock %}

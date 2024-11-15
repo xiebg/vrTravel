@@ -1,0 +1,20 @@
+use login;
+create table weather_district_id(
+                           areacode varchar(10) not null ,
+                           districtcode varchar(10) not null ,
+                           city_geocode varchar(10) not null ,
+                           city varchar(10) not null ,
+                           district_geocode varchar(10) not null ,
+                           district varchar(10) not null ,
+                           lon varchar(15) not null ,
+                           lat varchar(15) not null ,
+                           sta_fc varchar(10) not null,
+                           sta_rt varchar(10) not null,
+                           province varchar(10) not null,
+                           fc_lon varchar(10) not null,
+                           fc_lat varchar(10) not null,
+                           rt_lon varchar(10) not null,
+                           rt_lat varchar(10) not null,
+                           origin_areacode varchar(15) not null,
+                           exclude varchar(2) not null
+)DEFAULT CHARSET=utf8;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/btnNORMAL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="普通地图"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/btnSATELLITE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="卫星图"/>
+        <RadioButton
+            android:id="@+id/btnTraffic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="实况图"/>
+        <RadioButton
+            android:id="@+id/btnHeatMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="热力图"/>
+    </RadioGroup>
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/radioGroup"
+        android:clickable="true" />
+</RelativeLayout>

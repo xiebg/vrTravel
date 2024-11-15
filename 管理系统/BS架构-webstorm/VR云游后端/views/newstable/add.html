@@ -1,0 +1,109 @@
+{% extends '../layout.html' %}
+{% block head %}
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+<link rel="stylesheet" href="/public/css/public.css" media="all">
+{% endblock%}
+{% block body %}
+<form class="layui-form layuimini-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label required">新闻标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="news_title" lay-verify="required" lay-reqtext="标题不能为空" placeholder="请输入标题" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">新闻来源（作者）</label>
+        <div class="layui-input-block">
+            <input type="text" name="news_source" lay-verify="required" lay-reqtext="新闻来源不能为空" placeholder="请输入新闻来源" value="VR云游" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">新闻内容</label>
+<!--        <div style="text-align: center;margin-bottom: 10px">新闻内容</div>-->
+        <div class="layui-input-block" >
+<!--            <input type="text" name="news_content" lay-verify="required" lay-reqtext="新闻内容不能为空" placeholder="请输入新闻内容" value="" class="layui-input">-->
+            <!-- 加载编辑器的容器 -->
+            <script id="container" name="news_content" type="text/plain">hello world!</script>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+        </div>
+    </div>
+</form>
+<div style="height: 20px"></div>
+
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/public/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/public/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+
+
+
+<script>
+    // 实例化编辑器
+    var ue = UE.getEditor('container',{
+        initialFrameWidth :600,
+        initialFrameHeight:800,
+        toolbars: [
+            ['fullscreen', 'source', 'undo', 'redo'],
+            ['justifyleft', 'justifyright','justifycenter', 'justifyjustify','bold', 'italic','underline','fontborder', 'forecolor','backcolor', 'fontsize', 'fontfamily','strikethrough','superscript', 'subscript', 'removeformat'],
+            ['formatmatch','autotypeset', 'blockquote', 'pasteplain', '|','insertorderedlist', 'insertunorderedlist',"|",'selectall', 'cleardoc', 'link', 'unlink','lineheight','rowspacingtop','rowspacingbottom','insertframe','emotion'],
+            ['inserttable','deletetable','insertrow','insertrow','mergecells','deleterow','deletecol','splittocells','splittorows','splittocols','edittable','edittd',"|",'print','preview','help']
+        ]
+    });
+
+    ue.ready(function() {
+        //设置编辑器的内容
+        // ue.setContent('hello');
+        //获取html内容，返回: <p>hello</p>
+        var html = ue.getContent();
+        //获取纯文本内容，返回: hello
+        var txt = ue.getContentTxt();
+    });
+
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            var index = layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            }, function () {
+                var iframeIndex = parent.layer.getFrameIndex(window.name);
+                console.log();
+                parent.layer.close(iframeIndex);
+                //提交数据
+                // console.log(data.field);
+                $.ajax({
+                    url: "/table/news/add",
+                    type: "post",
+                    data: data.field,
+                    // dataType: "json",
+                    async: true, //同步
+                    success: function (x) {
+                        // layer.msg("添加成功");
+                    }
+                });
+                // 关闭弹出层
+                layer.close(index);
+                parent.location.reload();
+
+            });
+            return false;
+        });
+
+    });
+</script>
+{% endblock %}

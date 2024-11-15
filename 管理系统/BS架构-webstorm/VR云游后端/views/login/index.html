@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta charset="utf-8">
+<link rel="icon" sizes="any" mask="" href="/public/favicon.ico">
+<title>VR云游登录页面</title>
+
+<link rel="stylesheet" href="/public/css/loginstyle.css">
+</head>
+
+<body>
+    <div class="content">
+        <form class="form sign-in" action="/login" method="post">
+            <h2>欢迎回来</h2>
+            <label>
+                <span>用户名</span>
+                <input type="text" name="name" />
+            </label>
+            <label>
+                <span>密码</span>
+                <input type="password" name="pwd"/>
+            </label>
+            <p class="forgot-pass"><a href="javascript:">忘记密码？</a></p>
+            <button type="submit" class="submit">登 录</button>
+            <button type="button" class="fb-btn">使用 <span>facebook</span> 帐号登录</button>
+            <div style="text-align: center"><span style="color: red">{{msg}}</span></div>
+        </form>
+        <div class="sub-cont">
+            <div class="img">
+                <div class="img__text m--up">
+                    <h2>还未注册？</h2>
+                    <p>立即注册，发现大量机会！</p>
+                </div>
+                <div class="img__text m--in">
+                    <h2>已有帐号？</h2>
+                    <p>有帐号就登录吧，好久不见了！</p>
+                </div>
+                <div class="img__btn">
+                    <span class="m--up">注 册</span>
+                    <span class="m--in">登 录</span>
+
+                </div>
+            </div>
+            <form class="form sign-up" action="/register" method="post">
+                <h2>立即注册</h2>
+                <label>
+                    <span>用户名</span>
+                    <input type="text" name="name" />
+                </label>
+                <label>
+                    <span>邮箱</span>
+                    <input type="email" name="email" />
+                </label>
+                <label>
+                    <span>密码</span>
+                    <input type="password" name="pwd" />
+                </label>
+                <button type="submit" class="submit">注 册</button>
+                <button type="button" class="fb-btn">使用 <span>facebook</span> 帐号注册</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.img__btn').addEventListener('click', function() {
+            document.querySelector('.content').classList.toggle('s--signup')
+        })
+    </script>
+	
+	<div style="text-align:center;">
+</div>
+</body>
+
+</html>

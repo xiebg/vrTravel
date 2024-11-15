@@ -1,0 +1,161 @@
+{% extends 'layout.html' %}
+
+<!--<style>-->
+<!--    .demo-carousel{height: 200px; line-height: 200px; text-align: center;}-->
+<!--</style>-->
+{% block head %}
+
+{% endblock%}
+
+{% block body %}
+
+<table class="layui-hide" id="demo" lay-filter="test"></table>
+<div id="pageDemo"></div>
+<div style="height: 50px"></div>
+<!--行工具栏-->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="more">更多 <i class="layui-icon layui-icon-down"></i></a>
+</script>
+
+<script>
+
+    layui.config({
+        version: '1632428048355' //为了更新 js 缓存，可忽略
+    });
+    //加载模块
+    layui.use(function(){ //亦可加载特定模块：layui.use(['layer', 'laydate', function(){
+                          //得到各种内置组件
+        var layer = layui.layer //弹层
+            ,laypage = layui.laypage //分页
+            ,table = layui.table //表格
+            ,element = layui.element //元素操作
+            ,dropdown = layui.dropdown //下拉菜单
+
+        //向世界问个好
+        layer.msg('用户列表');
+
+        //监听Tab切换
+        element.on('tab(demo)', function(data){
+            layer.tips('切换了 '+ data.index +'：'+ this.innerHTML, this, {
+                tips: 1
+            });
+        });
+
+        //执行一个 usertable 实例
+        table.render({
+            elem: '#demo'
+            ,height: 420
+            ,url: '/table/user/' //数据接口
+            ,title: '用户表'
+            ,page: false //开启分页
+            ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            // ,totalRow: true //开启合计行
+            ,cols: [[ //表头
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left', totalRowText: '合计：'}
+                ,{field: 'username', title: '用户名', width:80}
+                ,{field: 'password', title: '密码', width:80}
+                // 表头工具栏
+                ,{field: '操作',toolbar:"#barDemo"}
+            ]]
+        });
+
+        //监听头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            console.log(obj);
+            var checkStatus = table.checkStatus(obj.config.id)
+                ,data = checkStatus.data; //获取选中的数据
+            switch(obj.event){
+                case 'add':
+                    layer.msg('添加');
+                    break;
+                case 'update':
+                    if(data.length === 0){
+                        layer.msg('请选择一行');
+                    } else if(data.length > 1){
+                        layer.msg('只能同时编辑一个');
+                    } else {
+                        layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+                    }
+                    break;
+                case 'delete':
+                    if(data.length === 0){
+                        layer.msg('请选择一行');
+                    } else {
+                        layer.msg('删除');
+                        console.log(obj);
+                    }
+                    break;
+            };
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 usertable 原始容器的属性 lay-filter="对应的值"
+            console.log(obj);
+            var data = obj.data //获得当前行数据
+                ,layEvent = obj.event; //获得 lay-event 对应的值
+            if(layEvent === 'detail'){
+                layer.msg('查看操作');
+            } else if(layEvent === 'more'){
+                //下拉菜单
+                dropdown.render({
+                    elem: this //触发事件的 DOM 对象
+                    ,show: true //外部事件触发即显示
+                    ,data: [{
+                        title: '编辑'
+                        ,id: 'edit'
+                    },{
+                        title: '删除'
+                        ,id: 'del'
+                    }]
+                    ,click: function(menudata){
+                        console.log(data);
+                        if(menudata.id === 'del'){
+                            //确认框
+                            layer.confirm('真的删除行么', function(index){
+                                obj.del(); //删除对应行（tr）的DOM结构
+                                layer.close(index);
+                                //向服务端发送删除指令
+                            });
+                        } else if(menudata.id === 'edit'){
+                            // 输出框
+                            layer.prompt({
+                                formType:0,
+                                value: data.password
+                            },function (value,index){
+                                //修改指定单元格的值,value是修改后的值
+                                obj.update({
+                                    username:value
+                                });
+                                //关闭弹出层
+                                layer.close(index);
+                                //操作数据库
+
+                            })
+                            layer.msg('编辑操作，当前行 ID:'+ data.id);
+
+                        }
+                    }
+                    ,align: 'right' //右对齐弹出（v2.6.8 新增）
+                    ,style: 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);' //设置额外样式
+                })
+            }
+        });
+
+        //分页
+        laypage.render({
+            elem: 'pageDemo' //分页容器的id
+            ,count: 1000 //数据总数
+            ,limit: 10 //每页显示的数据条数
+            ,skin: '#1E9FFF' //自定义选中色值
+            //,layout: ['prev', 'page', 'next', 'count', 'limit', 'refresh', 'skip'] //自定义排版
+            ,jump: function(obj, first){
+                if(!first){
+                    layer.msg('第'+ obj.curr +'页', {offset: 'b'});
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

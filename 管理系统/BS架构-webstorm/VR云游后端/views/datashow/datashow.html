@@ -1,0 +1,352 @@
+{% extends '../layout.html' %}
+{% block head %}
+    <link rel="stylesheet" href="/public/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="/public/css/public.css" media="all">
+{% endblock%}
+{% block body %}
+<!--<div class="layuimini-container">-->
+<div class="layuimini-main">
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md7">
+            <div id="echarts-map" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
+        </div>
+        <div class="layui-col-xs12 layui-col-md5">
+            <div id="echarts-pies" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
+        </div>
+    </div>
+
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md6">
+            <div id="echarts-dataset" style="background-color:#ffffff;min-height:380px;padding: 10px"></div>
+        </div>
+        <div class="layui-col-xs12 layui-col-md6">
+            <div id="echarts-records" style="background-color:#ffffff;min-height:380px;padding: 10px"></div>
+        </div>
+    </div>
+</div>
+<div style="height: 30px"></div>
+<!--</div>-->
+<script src="/public/js/echarts.min.js"></script>
+<script src="/public/js/map-config.js"></script>
+<script src="/public/js/china.js"></script>
+
+<script src="/public/js/lay-config.js" charset="utf-8"></script>
+
+<script>
+    layui.use(['layer', 'echarts'], function () {
+        var $ = layui.jquery,
+            layer = layui.layer,
+            echarts = layui.echarts;
+
+        /**
+         * 流光圆环图
+         */
+        var echartsPies = echarts.init(document.getElementById('echarts-pies'), 'walden');
+        // console.log(countdata);
+        $.ajax({
+            url: "/data/count",
+            type: "get",
+            data: "",
+            // dataType: "json",
+            async: true, //同步
+            success: function (datamsg) {
+                // layer.msg("添加成功");
+                var imgURL = "/public/images/bing.png";
+                const color = [
+                    '#0CD2E6',
+                    '#ffff33',
+                    '#33ff33',
+                    '#ff0033',
+                    '#886EFF',
+                    '#114C90',
+                    '#00BFA5',
+                ];
+                const data = [{
+                        "name": "VR外景",
+                        "value": datamsg.pano
+                    },
+                    {
+                        "name": "VR内景",
+                        "value": datamsg.indoor
+                    },
+                    {
+                        "name": "酒店",
+                        "value": datamsg.hotel
+                    },
+                    {
+                        "name": "新闻",
+                        "value": datamsg.news
+                    },
+                    {
+                        "name": "用户",
+                        "value": datamsg.user
+                    }
+                ]
+                // 设置数据
+                function setChartOption(data) {
+                    const formatData = [];
+                    data.forEach(function(item, index) {
+                        formatData.push({
+                            value: item.value,
+                            name: item.name,
+                            itemStyle: {
+                                normal: {
+                                    borderWidth: 10,
+                                    shadowBlur: 20,
+                                    borderColor: color[index],
+                                    shadowColor: color[index],
+                                },
+                            },
+                        }, {
+                            value: 5,
+                            name: '',
+                            itemStyle: {
+                                normal: {
+                                    label: {
+                                        show: false,
+                                    },
+                                    labelLine: {
+                                        show: false,
+                                    },
+                                    color: 'rgba(0, 0, 0, 0)',
+                                    borderColor: 'rgba(0, 0, 0, 0)',
+                                    borderWidth: 0,
+                                },
+                            },
+                        })
+                    })
+
+                    return formatData;
+                }
+
+                piesOption = {
+                    // backgroundColor: '#020933',
+                    color: color,
+                    title:{
+                        text: 'VR表统计',
+                        top:20,
+                        left: 'center',
+                        textStyle: {
+                            fontSize: 20,
+                            color: 'rgba(0,141,236,0.9)',
+                        },
+                    },
+                    legend: {   //图例
+                        // orient: 'vertical',
+                        left: 'right',
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b} : {c} ({d}%)'
+                    },
+                    graphic: {
+                        elements: [{
+                            type: 'image',
+                            z: 3,
+                            style: {
+                                image: imgURL,
+                                width: 50,
+                                height: 50,
+                            },
+                            left: 'center',
+                            top: 'center',
+                        }, ],
+                    },
+                    series: [{
+                        name: '',
+                        type: 'pie',
+                        radius: ['50%', '52%'],
+                        hoverAnimation: false,
+                        data: setChartOption(data),
+                    }, ],
+                }
+                echartsPies.setOption(piesOption);
+                // data: ['VR外景', 'VR内景', '酒店', '新闻', '用户'],
+
+
+                //柱状图
+                let yLabel = ['VR外景', 'VR内景', '酒店', '新闻', '用户']
+                let yData = [datamsg.pano,datamsg.indoor,datamsg.hotel,datamsg.news,datamsg.user]
+                let bgData = []
+                // for(let i in yData){
+                //     bgData.push(2000)
+                // }
+                var myColor=['#e63810','#ff6b00','#e3b61f','#13b5b1'];
+                var myBgColor=['rgba(230,56,16,0.2)','rgba(255,107,0,0.2)','rgba(227,182,31,0.2)','rgba(19,181,177,0.2)'];
+                optionDataset = {
+                    title:{
+                        text: '柱状图',
+                        left: 'center',
+                    },
+                    grid: {
+                        left: '5%',
+                        right: '5%',
+                        bottom: '5%',
+                        top: '10%',
+                        containLabel: true
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'none'
+                        },
+                        formatter: function(params) {
+                            return params[0].name + '<br/>' +
+                                "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(36,207,233,0.9)'></span>" +
+                                params[0].seriesName + ' : ' + params[0].value + ' <br/>'
+                        }
+                    },
+
+                    // backgroundColor: 'rgb(20,28,52)',
+                    xAxis: {
+                        show: false,
+                        type: 'value'
+                    },
+                    yAxis: [
+                        {
+                        type: 'category',
+                        inverse: true,
+                        axisLabel: {
+                            show: true,
+                            margin:15,
+                            textStyle: {
+                                // color: '#fff',
+                            },
+                        },
+                        splitLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            // show: false
+                        },
+                        data: yLabel
+                    }, {
+                        type: 'category',
+                        inverse: true,
+                        axisTick: 'none',
+                        axisLine: 'none',
+                        show: true,
+                        axisLabel: {
+                            textStyle: {
+                                color: '#9aeced',
+                                fontSize: '12'
+                            },
+                        },
+                        data: yData
+                    }],
+                    series: [{
+                        name: '人数',
+                        type: 'bar',
+                        zlevel: 1,
+                        itemStyle: {
+                            normal: {
+                                barBorderRadius: [0,30,30,0],
+                                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                    offset: 0,
+                                    color: '#52d8da'
+                                }, {
+                                    offset: 1,
+                                    color: '#57dcde'
+                                }]),
+                                shadowBlur:0,
+                                shadowColor:'rgba(87,220,222,0.7)'
+                            },
+                        },
+                        barWidth: 20,
+                        data: yData
+                    },
+                        {
+                            name: '背景',
+                            type: 'bar',
+                            barWidth: 20,
+                            barGap: '-100%',
+                            data: bgData,
+                            itemStyle: {
+                                normal: {
+                                    color: 'rgba(24,31,68,1)',
+                                    barBorderRadius: [0,30,30,0],
+                                }
+                            },
+                        },
+                    ]
+                };
+                echartsDataset.setOption(optionDataset);
+
+            }
+        });
+
+
+        /**
+         * 饼图与折线图
+         */
+        var echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
+        var optionRecords = {
+            title: {    //标题
+                text: '活跃数',
+                left: 'left'
+            },
+            legend: {
+                left: 'right',
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: '{c}'
+            },
+            dataset: {
+                source: [
+                    ['product', '周一', '周二', '周三', '周四', '周五', '周六','周日'],
+                    ['VR外景', 41, 30, 65, 53, 83, 98,104],
+                    ['VR内景', 86, 92, 85, 83, 73, 55,43],
+                    ['新闻', 24, 67, 79, 86, 65, 82,67],
+                    ['用户', 55, 67, 69, 72, 53, 39,83]
+                ]
+            },
+            xAxis: {type: 'category'},
+            yAxis: {gridIndex: 0},
+            grid: {top: '55%'},
+            series: [
+                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                {
+                    type: 'pie',
+                    id: 'pie',
+                    radius: '30%',
+                    center: ['50%', '25%'],
+                    label: {
+                        formatter: '{b}: ({d}%)'
+                    },
+                    encode: {
+                        itemName: 'product',
+                        value: '周日',
+                        tooltip: '周日'
+                    }
+                }
+            ]
+        };
+        echartsRecords.setOption(optionRecords);
+
+
+        /**
+         * 柱状图
+         */
+        var echartsDataset = echarts.init(document.getElementById('echarts-dataset'), 'walden');
+
+
+
+
+
+        // echarts 窗口缩放自适应
+        window.onresize = function () {
+            echartsRecords.resize();
+        }
+
+    });
+</script>
+{% endblock %}

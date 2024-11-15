@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1"
+    android:orientation="horizontal"
+    android:padding="5dip">
+
+    <Button
+        android:id="@+id/panorama_desc_pid"
+        android:layout_width="0dp"
+        android:layout_height="128dp"
+        android:layout_weight="1"
+        android:background="#FF3366"
+        android:drawableBottom="@drawable/guide_image"
+        android:layout_gravity="center_vertical"
+        android:padding="5dip"
+        android:text="VR导航"
+        android:textColor="#ffffff"
+        android:textSize="15dip" />
+
+    <Button
+        android:id="@+id/panorama_desc_uid_street"
+        android:layout_width="0dp"
+        android:layout_height="128dp"
+        android:layout_weight="1"
+        android:background="#FF6600"
+        android:drawableBottom="@drawable/ar_image"
+        android:padding="5dip"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:text="AR景点浏览"
+        android:textColor="#ffffff"
+        android:textSize="15dip" />
+</LinearLayout>
