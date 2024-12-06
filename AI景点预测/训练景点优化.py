@@ -29,8 +29,8 @@ def create_vgg16():
     # 添加全局平均池化层和输出层，并应用dropout和批量归一化技术
     model.add(Flatten())
     model.add(Dense(1024, activation='relu'))
-    model.add(Dropout(0.5))  # Dropout层，丢弃率为0.5
-    model.add(Dense(len(os.listdir(train_dir)), activation='softmax'))
+    # model.add(Dropout(0.5))  # Dropout层，丢弃率为0.5
+    # model.add(Dense(len(os.listdir(train_dir)), activation='softmax'))
     return model
 
 
@@ -65,6 +65,7 @@ if __name__ == '__main__':
     model.add(Dense(2048, activation='relu'))
     model.add(BatchNormalization())
     model.add(Dropout(0.5))
+    # model.add(Dense(len(os.listdir(train_dir)), activation='softmax'))
     model.add(Dense(train_generator.num_classes, activation='softmax'))
 
     optimizer = RMSprop(lr=1e-4)
